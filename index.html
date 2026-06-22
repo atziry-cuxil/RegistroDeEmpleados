@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Empleados</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <main class="container">
+
+        <h1>Sistema de Empleados</h1>
+
+        <section class="formulario">
+
+            <h2>Registrar Empleado</h2>
+
+            <form id="form">
+
+                <div class="campo">
+                    <label>Tipo de empleado</label>
+                    <select id="Tipo">
+                        <option value="desarrollador">Desarrollador</option>
+                        <option value="lenguaje">Gerente</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input id="nombre" type="text">
+                </div>
+
+                <div class="campo">
+                    <label>Edad</label>
+                    <input id="edad" type="number">
+                </div>
+
+                <div class="campo">
+                    <label>Salario Base</label>
+                    <input id="salario" type="number">
+                </div>
+
+                <div class="campo">
+                    <label>Lenguaje / Departamento</label>
+                    <input id="departamento" type="text">
+                </div>
+
+                <button id="Agregar" type="button" class="btn btn-dark">
+                    Agregar Empleado
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="empleados">
+
+            <h2>Listado de Empleados</h2>
+
+            <div id="contenedorPadre" class="empleados-grid">
+
+                <!-- Tarjetas generadas con JS -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
