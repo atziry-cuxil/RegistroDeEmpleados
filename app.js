@@ -48,24 +48,19 @@ class Empleado {
     }
 
     mostrarInformacion() {
-        return `<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${this.#nombre}</h5>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Edad: ${this.#edad}</li>
-    <li class="list-group-item">salario: ${this.#salario}</li>
-  </ul>
-</div>`
+        return {nombre: this.#nombre, edad: this.#salario, salario: this.#salario}
     }
 
 }
 
 class Desarrollador extends Empleado {
     #lenguaje;
+    #salarioFinal;
 
     constructor(nombre, edad, salario, lenguaje) {
         super(nombre, edad, salario)
         this.lenguaje = lenguaje
+        this.#salarioFinal = this.salario + this.calcularBono()
     }
 
     get lenguaje() {
@@ -75,31 +70,30 @@ class Desarrollador extends Empleado {
     set lenguaje(value) {
         this.#lenguaje = value
     }
+     
+    get salarioFinal(){
+        return this.#salarioFinal
+    }
 
     mostrarInformacion() {
-        return `<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${this.nombre}</h5>
-    <h6> Desarrollador! </h6>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Edad: ${this.edad}</li>
-    <li class="list-group-item">salario: ${this.salario}</li>
-    <li class="list-group-item">Lenguaje: ${this.lenguaje}</li>
-  </ul>
-</div>`
-    }
-
-    calcularBono(){//10%
+        return {nombre: this.nombre, edad: this.edad, salario: this.salario, salarioFinal: this.#salarioFinal, lenguaje: this.#lenguaje}
 
     }
+
+    calcularBono() {//10%
+        return (this.salario * 10) / 100
+    }
+
 }
 
 class Gerente extends Empleado {
     #departamento;
+    #salarioFinal;
 
     constructor(nombre, edad, salario, departamento) {
         super(nombre, edad, salario)
         this.departamento = departamento
+        this.#salarioFinal = this.salario + this.calcularBono()
     }
 
     get departamento() {
@@ -110,54 +104,70 @@ class Gerente extends Empleado {
         this.#departamento = value
     }
 
-    mostrarInformacion() {
-        return `<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${this.nombre}</h5>
-    <h6 > Gerente! </h6>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Edad: ${this.edad}</li>
-    <li class="list-group-item">salario: ${this.salario}</li>
-    <li class="list-group-item">Departamento: ${this.departamento}</li>
-  </ul>
-</div>`
+    get salarioFinal (){
+        return this.#salarioFinal
     }
 
-    calcularBono () {//20%
+    mostrarInformacion() {
+        return {nombre: this.nombre, edad: this.edad, salario: this.salario, salarioFinal: this.#salarioFinal, departamento: this.#departamento}
 
+    }
+
+    calcularBono() {//20%
+        return (this.salario * 20) / 100
     }
 }
 
+let nuevoEmpleado;
+let nuevaCard;
+
 btnAgregar.addEventListener('click', (event) => {
-    let nuevoEmpleado;
-    let nuevaCard;
-    //Guardar los objetos en un arreglo
-    //Imprimir los datos a traves del arreglo
-    //Calcular bono
-    //Mostrar salario final
-    //cambios de columnas
 
     if (selectTipo.value == 'desarrollador') {
         nuevoEmpleado = new Desarrollador(inputNombre.value, inputEdad.value, inputSalario.value, inputDepartamento.value)
-        //nuevaCard = nuevoEmpleado.mostrarInformacion()
-        //bono de 20%
     } else if (selectTipo.value == 'lenguaje') {
         nuevoEmpleado = new Gerente(inputNombre.value, inputEdad.value, inputSalario.value, inputDepartamento.value)
-        //nuevaCard = nuevoEmpleado.mostrarInformacion()
-        //bono 10%
     } else {
         nuevoEmpleado = new Empleado(inputNombre.value, inputEdad.value, inputSalario.value)
-        //nuevaCard = nuevoEmpleado.mostrarInformacion()
     }
 
-    contenedorListaEmpleados.innerHTML += nuevaCard
     empleadosRegistrados.push(nuevoEmpleado)
     form.reset()
+    renderizar()
+    console.log(empleadosRegistrados)
 })
 
-// for(let i = 0; i < nuevoEmpleado.length; i++){
-//     nuevaCard += ``
-//     nuevoEmpleado[i]
-//}
+function renderizar() {
+    contenedorListaEmpleados.innerHTML = ""
+    nuevaCard = ''
+    for (let i = 0; i < empleadosRegistrados.length; i++) {
+        if (empleadosRegistrados[i].lenguaje != undefined) {
+            nuevaCard += `<div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">${empleadosRegistrados[i].nombre}</h5>
+        <h6> Desarrollador! </h6>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Edad: ${empleadosRegistrados[i].edad}</li>
+        <li class="list-group-item">salario: ${empleadosRegistrados[i].salario}</li>
+        <li class="list-group-item">Lenguaje: ${empleadosRegistrados[i].lenguaje}</li>
+        <li class="list-group-item">salarioFinal: ${empleadosRegistrados[i].salariofinal}</li>
+    </ul>
+    </div>`
+        } else {
+            nuevaCard += `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">${empleadosRegistrados[i].nombre}</h5>
+        <h6> Gerente! </h6>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Edad: ${empleadosRegistrados[i].edad}</li>
+        <li class="list-group-item">salario: ${empleadosRegistrados[i].salario}</li>
+        <li class="list-group-item">Departamento: ${empleadosRegistrados[i].departamento}</li>
+        <li class="list-group-item">salarioFinal: ${empleadosRegistrados[i].salariofinal}</li>
+    </ul>
+    </div>`
+        }
+    }
+    contenedorListaEmpleados.innerHTML = nuevaCard
+}
 
 //Se podria agregar un boton eliminar
