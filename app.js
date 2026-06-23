@@ -124,9 +124,9 @@ let nuevaCard;
 btnAgregar.addEventListener('click', (event) => {
 
     if (selectTipo.value == 'desarrollador') {
-        nuevoEmpleado = new Desarrollador(inputNombre.value, inputEdad.value, inputSalario.value, inputDepartamento.value)
+        nuevoEmpleado = new Desarrollador(inputNombre.value, inputEdad.value, parseInt(inputSalario.value), inputDepartamento.value)
     } else if (selectTipo.value == 'lenguaje') {
-        nuevoEmpleado = new Gerente(inputNombre.value, inputEdad.value, inputSalario.value, inputDepartamento.value)
+        nuevoEmpleado = new Gerente(inputNombre.value, inputEdad.value, parseInt(inputSalario.value), inputDepartamento.value)
     } else {
         nuevoEmpleado = new Empleado(inputNombre.value, inputEdad.value, inputSalario.value)
     }
@@ -134,7 +134,6 @@ btnAgregar.addEventListener('click', (event) => {
     empleadosRegistrados.push(nuevoEmpleado)
     form.reset()
     renderizar()
-    console.log(empleadosRegistrados)
 })
 
 function renderizar() {
@@ -150,7 +149,7 @@ function renderizar() {
         <li class="list-group-item">Edad: ${empleadosRegistrados[i].edad}</li>
         <li class="list-group-item">salario: ${empleadosRegistrados[i].salario}</li>
         <li class="list-group-item">Lenguaje: ${empleadosRegistrados[i].lenguaje}</li>
-        <li class="list-group-item">salarioFinal: ${empleadosRegistrados[i].salariofinal}</li>
+        <li class="list-group-item">salarioFinal: ${empleadosRegistrados[i].salarioFinal}</li>
     </ul>
     </div>`
         } else {
@@ -162,7 +161,7 @@ function renderizar() {
         <li class="list-group-item">Edad: ${empleadosRegistrados[i].edad}</li>
         <li class="list-group-item">salario: ${empleadosRegistrados[i].salario}</li>
         <li class="list-group-item">Departamento: ${empleadosRegistrados[i].departamento}</li>
-        <li class="list-group-item">salarioFinal: ${empleadosRegistrados[i].salariofinal}</li>
+        <li class="list-group-item">salarioFinal: ${empleadosRegistrados[i].salarioFinal}</li>
     </ul>
     </div>`
         }
